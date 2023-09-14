@@ -7,7 +7,8 @@ spec:
   hosts:
   - catalogdetail
   http:
-  - match:
+  - name: "catalogDetail V2"
+    match:
     - uri:
         exact: /v2/catalogDetail
     rewrite:
@@ -18,7 +19,13 @@ spec:
         port:
           number: 3000
         subset: v2
-  - route:
+  - name: "catalogDetail V1"
+    match:
+    - uri:
+        exact: /v1/catalogDetail
+    rewrite:
+      uri: /catalogDetail
+    route:
     - destination:
         host: catalogdetail
         port:
